@@ -1,0 +1,6 @@
+2025-06-22 23:15:08 [info] Environment Configuration:
+2025-06-22 23:15:08 [info] Server running on port 3000
+2025-06-22 23:15:08 [info] Allowed CORS origins: http://localhost:8005, http://localhost:8006, http://localhost:8007, http://localhost:8008, http://localhost:3000, http://127.0.0.1:5500, http://127.0.0.1:5502, http://44.223.23.145:8005, http://44.223.23.145:8006, http://44.223.23.145:8007, http://44.223.23.145:8008, http://localhost:5500
+2025-06-22 23:15:08 [info] Environment: development
+2025-06-22 23:15:09 [info] Successfully connected to PostgreSQL
+2025-06-22 23:15:10 [info] Database schema initialized successfully

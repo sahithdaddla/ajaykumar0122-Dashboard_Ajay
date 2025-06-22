@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f2f5;
+        }
+
+        /* Container Styles */
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+            overflow: hidden;
+        }
+
+        /* Circle Background Elements */
+        .big-circle {
+            position: absolute;
+            width: 1000px;
+            height: 1000px;
+            background-color: #0077ff;
+            border-radius: 50%;
+            top: -500px;
+            left: -500px;
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        .small-circle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #0055cc;
+            border-radius: 50%;
+            bottom: 20px;
+            left: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+
+        .overlay-circle {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background-color: #0055cc;
+            border-radius: 50%;
+            top: 220px;
+            left: 350px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: float 3s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .right-bottom-circle {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: #0055cc;
+            border-radius: 50%;
+            bottom: -42px;
+            right: -42px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+
+        /* Welcome Text Styles */
+        .welcome-text {
+            position: absolute;
+            top: 35%;
+            left: 2%;
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 3;
+        }
+
+        .welcome-text span {
+            font-size: 31px;
+            color: rgb(255, 255, 255);
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 0;
+            animation: typing 3s steps(20, end) forwards;
+        }
+
+        .welcome-text p {
+            font-size: 18px;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+            animation-delay: 3s;
+        }
+
+        /* Form Container Styles */
+        .form-container {
+            position: absolute;
+            top: 50%;
+            right: 20%;
+            transform: translateY(-50%);
+            width: 330px;
+            color: black;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 30px;
+            color: #0077ff;
+            font-weight: 600;
+        }
+
+        /* Input Field Styles */
+        .input-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 12px 50px 12px 12px;
+            border: none;
+            border-bottom: 2px solid #000000;
+            background: transparent;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-container input:focus {
+            border-bottom-color: #0077ff;
+        }
+
+        .input-container label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 16px;
+            color: #000000;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-container input:focus + label,
+        .input-container input:not(:placeholder-shown) + label {
+            top: -15px;
+            font-size: 14px;
+            color: #0077ff;
+        }
+
+        /* Error Message Styles */
+        .error-message {
+            color: #ff3333;
+            font-size: 13px;
+            text-align: left;
+            padding-left: 12px;
+            padding-top: 5px;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+        }
+
+        /* Password Field Specific Styles */
+        .password-container {
+            position: relative;
+        }
+
+        .password-container .eye-icon {
+            position: absolute;
+            right: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #0077ff;
+            font-size: 18px;
+            z-index: 2;
+        }
+
+        .info-icon {
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #0077ff;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .checkmark {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #28a745;
+            font-size: 16px;
+            display: none;
+            z-index: 2;
+        }
+
+        .checkmark.invalid {
+            color: #ff3333;
+            display: none;
+        }
+
+        /* Button Styles */
+        .form-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #0077ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .form-button:hover {
+            background-color: #0055cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Links Styles */
+        .links {
+            margin-top: 20px;
+            font-size: 15px;
+        }
+
+        .links a {
+            color: #0077ff;
+            text-decoration: none;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .links a:hover {
+            color: #0055cc;
+            text-decoration: underline;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 320px;
+            text-align: left;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-content h3 {
+            margin: 0 0 15px;
+            color: #0077ff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal-content ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .modal-content li {
+            margin-bottom: 8px;
+        }
+
+        .modal-content button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #0077ff;
+            font-weight: bold;
+        }
+
+        /* Notification Styles */
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideInRight 0.5s ease-out, slideOutRight 0.5s ease-out 2.5s forwards;
+        }
+
+        .alert.success {
+            background: #28a745;
+        }
+
+        .alert.error {
+            background: #ff3333;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 370px; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .big-circle {
+                width: 800px;
+                height: 800px;
+                top: -400px;
+                left: -400px;
+            }
+
+            .overlay-circle {
+                top: 180px;
+                left: 250px;
+                width: 120px;
+                height: 120px;
+            }
+
+            .form-container {
+                right: 10%;
+                width: 300px;
+                padding: 25px;
+            }
+
+            .welcome-text {
+                top: 30%;
+                left: 5%;
+            }
+
+            .welcome-text span {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .big-circle {
+                width: 600px;
+                height: 600px;
+                top: -300px;
+                left: -300px;
+            }
+
+            .small-circle {
+                width: 80px;
+                height: 80px;
+                bottom: 10px;
+                left: 10px;
+            }
+
+            .overlay-circle {
+                top: 150px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 100px;
+            }
+
+            .right-bottom-circle {
+                width: 100px;
+                height: 100px;
+                bottom: -30px;
+                right: -30px;
+            }
+
+            .welcome-text {
+                top: 20%;
+                left: 50%;
+                transform: translateX(-50%);
+                text-align: center;
+            }
+
+            .welcome-text span {
+                font-size: 24px;
+            }
+
+            .welcome-text p {
+                font-size: 16px;
+            }
+
+            .form-container {
+                top: 50%;
+                right: 50%;
+                transform: translate(50%, -50%);
+                width: 90%;
+                max-width: 280px;
+                padding: 20px;
+            }
+
+            .form-container h2 {
+                font-size: 24px;
+            }
+
+            .modal-content {
+                width: 280px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .big-circle {
+                width: 500px;
+                height: 500px;
+                top: -250px;
+                left: -250px;
+            }
+
+            .small-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            .overlay-circle {
+                width: 80px;
+                height: 80px;
+                top: 120px;
+            }
+
+            .right-bottom-circle {
+                width: 80px;
+                height: 80px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .welcome-text span {
+                font-size: 20px;
+            }
+
+            .welcome-text p {
+                font-size: 14px;
+            }
+
+            .form-container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .form-container h2 {
+                font-size: 20px;
+            }
+
+            .input-container input {
+                font-size: 14px;
+                padding: 10px 40px 10px 10px;
+            }
+
+            .input-container label {
+                font-size: 14px;
+            }
+
+            .info-icon {
+                right: 55px;
+                font-size: 14px;
+            }
+
+            .eye-icon {
+                right: 30px;
+                font-size: 16px;
+            }
+
+            .checkmark {
+                font-size: 14px;
+            }
+
+            .form-button {
+                font-size: 15px;
+                padding: 12px;
+            }
+
+            .modal-content {
+                width: 90%;
+                max-width: 260px;
+                padding: 15px;
+            }
+
+            .modal-content h3 {
+                font-size: 16px;
+            }
+
+            .modal-content ul {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="big-circle"></div>
+        <div class="small-circle"></div>
+        <div class="overlay-circle"></div>
+        <div class="right-bottom-circle"></div>
+
+        <div class="welcome-text">
+            <span>Astrolite Tech Solutions</span>
+            <p>For a bright future, we stand together</p>
+        </div>
+
+        <div class="form-container">
+            <h2>Forgot Password</h2>
+            <form id="forgotPasswordForm">
+                <div class="input-container">
+                    <input type="email" id="email" placeholder=" " required>
+                    <label for="email">Email</label>
+                    <span id="email-checkmark" class="checkmark">✓</span>
+                    <span id="email-cross" class="checkmark invalid">✗</span>
+                </div>
+                <div id="email-error" class="error-message"></div>
+                
+                <div class="input-container password-container">
+                    <input type="password" id="newPassword" placeholder=" " required>
+                    <label for="newPassword">New Password</label>
+                    <span class="info-icon" onclick="toggleModal()">i</span>
+                    <span class="eye-icon" onclick="togglePassword('newPassword')">👁️</span>
+                    <span id="new-password-checkmark" class="checkmark">✓</span>
+                </div>
+                <div id="new-password-error" class="error-message"></div>
+                
+                <div class="input-container password-container">
+                    <input type="password" id="confirmNewPassword" placeholder=" " required>
+                    <label for="confirmNewPassword">Confirm New Password</label>
+                    <span class="eye-icon" onclick="togglePassword('confirmNewPassword')">👁️</span>
+                    <span id="confirm-password-checkmark" class="checkmark">✓</span>
+                </div>
+                <div id="confirm-password-error" class="error-message"></div>
+                
+                <button type="submit" id="resetPasswordBtn" class="form-button" disabled>Reset Password</button>
+            </form>
+            <div class="links">
+                <a href="http://localhost:8006/">Back to Login</a>
+            </div>
+        </div>
+
+        <div id="passwordModal" class="modal">
+            <div class="modal-content">
+                <button onclick="toggleModal()">×</button>
+                <h3>Password Requirements</h3>
+                <ul>
+                    <li>Minimum 8 characters</li>
+                    <li>At least one uppercase letter</li>
+                    <li>At least one number</li>
+                    <li>At least one special symbol (e.g., !@#$%^&*)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+       let isEmailValid = false;
+let isNewPasswordValid = false;
+let isConfirmPasswordValid = false;
+
+// Show Alert
+function showAlert(type, message) {
+    const existingAlerts = document.querySelectorAll('.alert');
+    existingAlerts.forEach(alert => alert.remove()); // Remove duplicate alerts
+
+    const alert = document.createElement('div');
+    alert.className = `alert ${type}`;
+    alert.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        ${message}
+    `;
+    document.body.appendChild(alert);
+    setTimeout(() => alert.remove(), 3000);
+}
+
+// Toggle Password Visibility
+function togglePassword(id) {
+    const passwordInput = document.getElementById(id);
+    const eyeIcon = passwordInput.parentElement.querySelector('.eye-icon');
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    eyeIcon.textContent = passwordInput.type === 'password' ? '👁️' : '🔓';
+}
+
+// Toggle Modal
+function toggleModal() {
+    const modal = document.getElementById('passwordModal');
+    modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// Update Reset Button State
+function updateResetButton() {
+    const resetButton = document.getElementById('resetPasswordBtn');
+    resetButton.disabled = !(isEmailValid && isNewPasswordValid && isConfirmPasswordValid);
+}
+
+// Debounce function to limit API calls
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Check Email
+const checkEmail = debounce(async (email) => {
+    const emailError = document.getElementById('email-error');
+    const emailCheckmark = document.getElementById('email-checkmark');
+    const emailCross = document.getElementById('email-cross');
+
+    if (!email) {
+        emailError.textContent = '';
+        emailCheckmark.style.display = 'none';
+        emailCross.style.display = 'none';
+        isEmailValid = false;
+        updateResetButton();
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        emailError.textContent = 'Invalid email format';
+        emailCheckmark.style.display = 'none';
+        emailCross.style.display = 'block';
+        isEmailValid = false;
+        updateResetButton();
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:3000/check-email-data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+        
+        if (data.exists) {
+            emailError.textContent = '';
+            emailCheckmark.style.display = 'block';
+            emailCross.style.display = 'none';
+            isEmailValid = true;
+        } else {
+            emailError.textContent = 'Email not registered';
+            emailCheckmark.style.display = 'none';
+            emailCross.style.display = 'block';
+            isEmailValid = false;
+        }
+    } catch (err) {
+        emailError.textContent = 'Error checking email';
+        emailCheckmark.style.display = 'none';
+        emailCross.style.display = 'block';
+        isEmailValid = false;
+    }
+    updateResetButton();
+}, 500);
+
+// Validate New Password
+function validateNewPassword() {
+    const newPassword = document.getElementById('newPassword').value;
+    const newPasswordError = document.getElementById('new-password-error');
+    const newPasswordCheckmark = document.getElementById('new-password-checkmark');
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    
+    if (!newPassword) {
+        newPasswordError.textContent = 'Password is required';
+        newPasswordCheckmark.style.display = 'none';
+        isNewPasswordValid = false;
+    } else if (newPassword.length < 8) {
+        newPasswordError.textContent = 'Password must be at least 8 characters';
+        newPasswordCheckmark.style.display = 'none';
+        isNewPasswordValid = false;
+    } else if (!passwordRegex.test(newPassword)) {
+        newPasswordError.textContent = 'Include uppercase, number, and symbol';
+        newPasswordCheckmark.style.display = 'none';
+        isNewPasswordValid = false;
+    } else {
+        newPasswordError.textContent = '';
+        newPasswordCheckmark.style.display = 'block';
+        isNewPasswordValid = true;
+    }
+    validateConfirmPassword(); // Re-validate confirm password when new password changes
+    updateResetButton();
+}
+
+// Validate Confirm Password
+function validateConfirmPassword() {
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+    const confirmPasswordError = document.getElementById('confirm-password-error');
+    const confirmPasswordCheckmark = document.getElementById('confirm-password-checkmark');
+
+    if (!confirmNewPassword) {
+        confirmPasswordError.textContent = 'Please confirm your password';
+        confirmPasswordCheckmark.style.display = 'none';
+        isConfirmPasswordValid = false;
+    } else if (confirmNewPassword !== newPassword) {
+        confirmPasswordError.textContent = 'Passwords do not match';
+        confirmPasswordCheckmark.style.display = 'none';
+        isConfirmPasswordValid = false;
+    } else {
+        confirmPasswordError.textContent = '';
+        confirmPasswordCheckmark.style.display = 'block';
+        isConfirmPasswordValid = true;
+    }
+    updateResetButton();
+}
+
+// Event Listeners
+document.getElementById('email').addEventListener('input', (e) => {
+    const email = e.target.value.trim();
+    checkEmail(email);
+});
+
+document.getElementById('newPassword').addEventListener('input', validateNewPassword);
+document.getElementById('confirmNewPassword').addEventListener('input', validateConfirmPassword);
+
+document.getElementById('forgotPasswordForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!isEmailValid || !isNewPasswordValid || !isConfirmPasswordValid) {
+        document.getElementById('confirm-password-error').textContent = 'Please correct all errors';
+        showAlert('error', 'Please correct all errors');
+        return;
+    }
+
+    const email = document.getElementById('email').value.trim();
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+    const submitButton = document.getElementById('resetPasswordBtn');
+
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
+
+    try {
+        const response = await fetch('http://localhost:3000/api/forgot', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, newPassword, confirmNewPassword })
+        });
+        const data = await response.json();
+        
+        if (response.ok) {
+            showAlert('success', data.message || 'Password reset successfully!');
+            setTimeout(() => {
+                window.location.href = 'http://localhost:8006/';
+            }, 1000);
+        } else {
+            document.getElementById('confirm-password-error').textContent = data.error || 'Password reset failed';
+            showAlert('error', data.error || 'Password reset failed');
+        }
+    } catch (err) {
+        document.getElementById('confirm-password-error').textContent = 'Error connecting to server';
+        showAlert('error', 'Error connecting to server');
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Reset Password';
+    }
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('passwordModal');
+    if (e.target === modal) {
+        toggleModal();
+    }
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('email').focus();
+});
+    </script>
+</body>
+</html>

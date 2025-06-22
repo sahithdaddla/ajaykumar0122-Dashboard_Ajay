@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HRMS Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #6366f1;
+      --primary-light: #e0e7ff;
+      --accent-color: #8b5cf6;
+      --dark-color: #1e293b;
+      --light-color: #ffffff;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-700: #334155;
+      --header-height: 70px;
+      --sidebar-width: 90px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--gray-100);
+      color: var(--dark-color);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: var(--header-height);
+      padding: 0 30px;
+      background-color: var(--light-color);
+      box-shadow: var(--shadow-sm);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    .logo {
+      height: 40px;
+      transition: var(--transition);
+    }
+#logoutBtn {
+  padding: 10px 20px;
+  background-color: #dc3545; /* Bootstrap's red color */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#logoutBtn:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: translateY(-2px);
+}
+
+#logoutBtn:active {
+  background-color: #bd2130;
+  transform: scale(0.98);
+}
+
+#logoutBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.4);
+}
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      padding: 8px 16px;
+      background-color: var(--gray-100);
+      border-radius: 10px;
+      width: 280px;
+      transition: var(--transition);
+    }
+
+    .search-bar:focus-within {
+      box-shadow: 0 0 0 2px var(--primary-light);
+      background-color: var(--light-color);
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      padding: 4px;
+      background-color: transparent;
+      width: 100%;
+      font-size: 0.9rem;
+      color: var(--dark-color);
+    }
+
+    .search-bar input::placeholder {
+      color: var(--gray-300);
+    }
+
+    .search-bar button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--gray-700);
+      transition: var(--transition);
+    }
+
+    .search-bar button:hover {
+      color: var(--primary-color);
+    }
+
+    .header-icon {
+      position: relative;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--gray-700);
+      transition: var(--transition);
+      padding: 8px;
+      border-radius: 8px;
+    }
+
+    .header-icon:hover {
+      background-color: var(--gray-100);
+      color: var(--primary-color);
+    }
+
+    .header-icon .badge {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 600;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .user-profile:hover {
+      background-color: var(--gray-100);
+    }
+
+    .user-name {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gray-200);
+      transition: var(--transition);
+    }
+
+    .user-profile:hover .user-avatar {
+      border-color: var(--primary-color);
+    }
+
+    .main-layout {
+      display: flex;
+      flex: 1;
+      margin-top: var(--header-height);
+      height: calc(100vh - var(--header-height));
+      transition: var(--transition);
+    }
+
+    .sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--light-color);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      overflow-y: auto;
+      scrollbar-width: none;
+      z-index: 90;
+      transition: var(--transition);
+    }
+
+    .sidebar:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .sidebar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-item {
+      width: 56px;
+      height: 56px;
+      margin: 8px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: var(--transition);
+      text-align: center;
+      position: relative;
+    }
+
+    .nav-item img {
+      width: 22px;
+      height: 22px;
+      transition: var(--transition);
+    }
+
+    .nav-item span {
+      font-size: 0.65rem;
+      margin-top: 6px;
+      font-weight: 500;
+      color: var(--gray-700);
+      transition: var(--transition);
+    }
+
+    .nav-item:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-2px);
+    }
+
+    .nav-item:hover img {
+      filter: brightness(0) saturate(100%) invert(39%) sepia(98%) saturate(747%) hue-rotate(209deg) brightness(93%) contrast(96%);
+    }
+
+    .nav-item:hover span {
+      color: var(--primary-color);
+    }
+
+    .nav-item.active {
+      background-color: var(--primary-light);
+      box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2), 0 2px 4px -1px rgba(99, 102, 241, 0.1);
+    }
+
+    .nav-item.active img {
+      filter: brightness(0) saturate(100%) invert(39%) sepia(98%) saturate(747%) hue-rotate(209deg) brightness(93%) contrast(96%);
+    }
+
+    .nav-item.active span {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .nav-item.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 24px;
+      background-color: var(--primary-color);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .content-area {
+      flex: 1;
+      background-color: var(--light-color);
+      overflow-y: auto;
+      border-radius: 16px 0 0 0;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .content-area iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: var(--light-color);
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #0f172a;
+      color: #f8fafc;
+    }
+
+    body.dark-mode .header,
+    body.dark-mode .sidebar {
+      background-color: #1e293b;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .content-area {
+      background-color: #1e293b;
+    }
+
+    body.dark-mode .search-bar {
+      background-color: #334155;
+    }
+
+    body.dark-mode .search-bar input {
+      color: #f8fafc;
+    }
+
+    body.dark-mode .search-bar input::placeholder {
+      color: #64748b;
+    }
+
+    body.dark-mode .header-icon {
+      color: #94a3b8;
+    }
+
+    body.dark-mode .header-icon:hover {
+      background-color: #334155;
+      color: var(--primary-color);
+    }
+
+    body.dark-mode .user-profile:hover {
+      background-color: #334155;
+    }
+
+    body.dark-mode .user-avatar {
+      border-color: #475569;
+    }
+
+    body.dark-mode .nav-item span {
+      color: #94a3b8;
+    }
+
+    body.dark-mode .nav-item:hover {
+      background-color: #334155;
+    }
+
+    body.dark-mode .nav-item.active {
+      background-color: #334155;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOutRight {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* Alert styles */
+    .alert {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-xl);
+      z-index: 1000;
+      animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                 slideOutRight 0.5s cubic-bezier(0.5, 0, 0.75, 0) 2.5s forwards;
+      max-width: 350px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .alert i {
+      font-size: 1.2rem;
+    }
+
+    .alert.error {
+      background: rgba(239, 68, 68, 0.9);
+    }
+
+    .alert.success {
+      background: rgba(16, 185, 129, 0.9);
+    }
+
+    .alert.warning {
+      background: rgba(245, 158, 11, 0.9);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1024px) {
+      :root {
+        --sidebar-width: 80px;
+      }
+      
+      .search-bar {
+        width: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 20px;
+      }
+      
+      .search-bar {
+        width: 200px;
+        margin-left: 0;
+      }
+      
+      .logo {
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .search-bar {
+        display: none;
+      }
+      
+      .user-name {
+        display: none;
+      }
+      
+      .user-profile {
+        padding: 0;
+      }
+      
+      .header-icon {
+        padding: 6px;
+      }
+    }
+
+    /* Loading animation */
+    .skeleton {
+      background-color: var(--gray-200);
+      border-radius: 6px;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    body.dark-mode .skeleton {
+      background-color: #334155;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="https://www.astrolitetech.com/assets/uploads/logo.png" alt="Company Logo" class="logo" />
+    </div>
+    <div class="header-right">
+        <!-- Somewhere in your navigation bar or user dropdown -->
+<button id="logoutBtn">Logout</button>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search employees, reports..."/>
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="header-icon" id="themeToggle" title="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </div>
+      <div class="header-icon notification-icon" title="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="badge">3</span>
+      </div>
+      <div class="user-profile">
+        <div class="skeleton" style="width:36px;height:36px;border-radius:50%;" id="avatarSkeleton"></div>
+        <img src="https://img.icons8.com/fluency/48/user-male-circle.png" alt="User Avatar" class="user-avatar" id="userAvatar" style="display:none;" />
+        <span class="user-name" id="userName">Loading...</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <div class="sidebar">
+      <div class="nav-item active" data-module="attendance" title="Attendance">
+        <img src="https://img.icons8.com/color/48/calendar--v1.png" alt="Attendance"/>
+        <span>Attendance</span>
+      </div>
+      <div class="nav-item" data-module="leave" title="Leave Management">
+        <img src="https://img.icons8.com/color/48/beach.png" alt="Leave"/>
+        <span>Leave</span>
+      </div>
+      <div class="nav-item" data-module="wfh" title="Work From Home">
+        <img src="https://img.icons8.com/color/48/laptop.png" alt="WFH"/>
+        <span>WFH</span>
+      </div>
+      <div class="nav-item" data-module="recruitment" title="Recruitment">
+        <img src="https://img.icons8.com/color/48/resume.png" alt="Recruitment"/>
+        <span>Recruit</span>
+      </div>
+      <div class="nav-item" data-module="notifications" title="Notifications">
+        <img src="https://img.icons8.com/color/48/appointment-reminders.png" alt="Notifications"/>
+        <span>Notify</span>
+      </div>
+      <div class="nav-item" data-module="payslip" title="Payroll">
+        <img src="https://img.icons8.com/color/48/money-bag.png" alt="Payroll"/>
+        <span>Payroll</span>
+      </div>
+      <div class="nav-item" data-module="tasks" title="Tasks">
+        <img src="https://img.icons8.com/color/48/task-completed.png" alt="Tasks"/>
+        <span>Tasks</span>
+      </div>
+      <div class="nav-item" data-module="offboarding" title="Offboarding">
+        <img src="https://img.icons8.com/color/48/exit.png" alt="Offboarding"/>
+        <span>Offboard</span>
+      </div>
+      <div class="nav-item" data-module="helpdesk" title="Help Desk">
+        <img src="https://img.icons8.com/color/48/help.png" alt="Help Desk"/>
+        <span>Help Desk</span>
+      </div>
+    </div>
+
+    <div class="content-area">
+      <iframe id="contentFrame" src="http://54.166.206.245:8022/" loading="lazy"></iframe>
+    </div>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const config = {
+    apiBaseUrl: 'http://localhost:3000/api',
+    authUrls: {
+      login: 'http://localhost:8004'
+    },
+    modules: {
+      attendance: 'http://3.88.203.125:7100/',
+      leave: 'http://54.166.206.245:8022/',
+      wfh: 'http://54.166.206.245:8026/',
+      recruitment: 'http://3.88.203.125:8024/',
+      payslip: 'http://54.166.206.245:8047/',
+      tasks: 'http://54.166.206.245:8133/',
+      offboarding: 'http://54.166.206.245:8035/',
+      helpdesk: 'http://54.166.206.245:8042/'
+    },
+    sessionCheckInterval: 300000
+  };
+
+  const elements = {
+    contentFrame: document.getElementById('contentFrame'),
+    avatarSkeleton: document.getElementById('avatarSkeleton'),
+    userAvatar: document.getElementById('userAvatar'),
+    userName: document.getElementById('userName'),
+    themeToggle: document.getElementById('themeToggle'),
+    navItems: document.querySelectorAll('.nav-item'),
+    userProfile: document.querySelector('.user-profile'),
+    logoutBtn: document.getElementById('logoutBtn')
+  };
+
+  const state = {
+    user: null,
+    token: null,
+    isDarkMode: false
+  };
+
+  const utils = {
+    showAlert: (type, message) => {
+      const alert = document.createElement('div');
+      alert.className = `alert ${type}`;
+      const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        warning: 'fa-exclamation-triangle',
+        info: 'fa-info-circle'
+      };
+      alert.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i> ${message}`;
+      document.body.appendChild(alert);
+      setTimeout(() => {
+        alert.style.animation = 'slideOutRight 0.5s ease-out forwards';
+        setTimeout(() => alert.remove(), 500);
+      }, 3000);
+    },
+
+    handleApiError: (error) => {
+      console.error('API Error:', error);
+      utils.showAlert('error', error.message || 'An error occurred');
+      if (error.status === 401) {
+        localStorage.removeItem('token');
+        document.cookie = 'accessToken=; Max-Age=0; path=/;';
+        document.cookie = 'refreshToken=; Max-Age=0; path=/;';
+        setTimeout(() => {
+          window.location.href = config.authUrls.login;
+        }, 2000);
+      }
+    },
+
+    getCookie: (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    },
+
+    fetchWithAuth: async (url, options = {}) => {
+      try {
+        const token = utils.getCookie('accessToken') || localStorage.getItem('token');
+        if (!token) {
+          throw { status: 401, message: 'No authentication token found' };
+        }
+
+        const response = await fetch(`${config.apiBaseUrl}${url}`, {
+          ...options,
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            ...options.headers
+          },
+          credentials: 'include'
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw {
+            status: response.status,
+            message: errorData.error || 'Request failed'
+          };
+        }
+
+        return await response.json();
+      } catch (error) {
+        utils.handleApiError(error);
+        throw error;
+      }
+    }
+  };
+
+  const core = {
+    verifySession: async () => {
+      const token = utils.getCookie('accessToken') || localStorage.getItem('token');
+      if (!token) {
+        utils.showAlert('error', 'Please log in to access the dashboard');
+        setTimeout(() => {
+          window.location.href = config.authUrls.login;
+        }, 3000);
+        return false;
+      }
+
+      try {
+        const response = await utils.fetchWithAuth('/profile');
+        state.user = response.profile;
+        state.token = token;
+
+        console.log('User profile data:', state.user); // Debug log
+
+        setTimeout(() => {
+          elements.avatarSkeleton.style.display = 'none';
+          elements.userAvatar.style.display = 'block';
+          
+          // Use the profile_image URL directly from the response
+          elements.userAvatar.src = state.user.profile_image || 
+            'https://img.icons8.com/fluency/48/user-male-circle.png';
+          
+          elements.userName.textContent = state.user.username || 'User';
+          elements.userName.style.opacity = 0;
+          setTimeout(() => {
+            elements.userName.style.transition = 'opacity 0.3s ease';
+            elements.userName.style.opacity = 1;
+          }, 50);
+        }, 800);
+
+        return true;
+      } catch (error) {
+        localStorage.removeItem('token');
+        document.cookie = 'accessToken=; Max-Age=0; path=/;';
+        document.cookie = 'refreshToken=; Max-Age=0; path=/;';
+        return false;
+      }
+    },
+
+    initTheme: () => {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const savedTheme = localStorage.getItem('theme');
+      state.isDarkMode = savedTheme === 'dark' || (!savedTheme && prefersDark);
+      if (state.isDarkMode) {
+        document.body.classList.add('dark-mode');
+        elements.themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+
+      elements.themeToggle.addEventListener('click', () => {
+        state.isDarkMode = !state.isDarkMode;
+        document.body.classList.toggle('dark-mode');
+        elements.themeToggle.innerHTML = state.isDarkMode
+          ? '<i class="fas fa-sun"></i>'
+          : '<i class="fas fa-moon"></i>';
+        localStorage.setItem('theme', state.isDarkMode ? 'dark' : 'light');
+      });
+    },
+
+    initNavigation: () => {
+      elements.navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          elements.navItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          const module = item.getAttribute('data-module');
+          if (config.modules[module]) {
+            elements.contentFrame.style.opacity = '0.5';
+            elements.contentFrame.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+              elements.contentFrame.src = config.modules[module];
+              elements.contentFrame.onload = () => {
+                elements.contentFrame.style.opacity = '1';
+              };
+            }, 200);
+          }
+        });
+      });
+    },
+
+    initSessionChecker: () => {
+      setInterval(async () => {
+        await core.verifySession();
+      }, config.sessionCheckInterval);
+    },
+
+    handleLogout: () => {
+      fetch(`${config.apiBaseUrl}/logout`, {
+        method: 'POST',
+        credentials: 'include'
+      })
+      .then(() => {
+        localStorage.removeItem('token');
+        document.cookie = 'accessToken=; Max-Age=0; path=/;';
+        document.cookie = 'refreshToken=; Max-Age=0; path=/;';
+        utils.showAlert('success', 'Logged out successfully');
+        setTimeout(() => {
+          window.location.href = config.authUrls.login;
+        }, 1000);
+      })
+      .catch(err => {
+        utils.handleApiError(err);
+      });
+    }
+  };
+
+  const init = async () => {
+    const isAuthenticated = await core.verifySession();
+    if (isAuthenticated) {
+      core.initTheme();
+      core.initNavigation();
+      core.initSessionChecker();
+      setTimeout(() => {
+        utils.showAlert('success', `Welcome back, ${state.user.username || 'User'}!`);
+      }, 1000);
+    }
+  };
+
+  init();
+
+  // Attach logout button
+  elements.logoutBtn?.addEventListener('click', core.handleLogout);
+});
+
+// Iframe error handling
+document.getElementById('contentFrame')?.addEventListener('error', () => {
+  const alert = document.createElement('div');
+  alert.className = 'alert error';
+  alert.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to load module. Please try again later.';
+  document.body.appendChild(alert);
+  setTimeout(() => alert.remove(), 3000);
+});
+</script>
+
+
+
+</body>
+</html>
