@@ -187,7 +187,7 @@ pool.on('error', (err) => {
 
 // JWT Configuration
 const JWT_SECRET = process.env.JWT_SECRET || 'Abderoiouwi@12342';
-const ACCESS_TOKEN_EXPIRY = '15m';
+const ACCESS_TOKEN_EXPIRY = '58m';
 const REFRESH_TOKEN_EXPIRY = '7d';
 
 const verifyToken = (req, res, next) => {
