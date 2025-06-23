@@ -6,3 +6,118 @@ Database client connected
 Successfully connected to PostgreSQL
 Database client connected
 Database schema initialized successfully
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Database client connected
+POST /check-email-data 200 214ms - 127.0.0.1
+CORS request from: http://127.0.0.1:5500
+POST /check-email-data 200 14ms - 127.0.0.1
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+POST /check-email-data 200 11ms - 127.0.0.1
+CORS request from: http://127.0.0.1:5500
+Verification token generated for ajayq@gmail.com
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Database client connected
+User ajayq@gmail.com logged in successfully
+POST /api/login 200 1145ms - 127.0.0.1
+Auth Request: POST /api/login
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 200 23ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+Database client connected
+GET /api/profile 304 219ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+Database client connected
+GET /api/profile 304 186ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+Database client connected
+GET /api/profile 304 113ms - 127.0.0.1
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+Database client connected
+GET /api/profile 304 434ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 12ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Token verification failed:
+GET /api/profile 401 11ms - 127.0.0.1
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Database client connected
+User ajayq@gmail.com logged in successfully
+POST /api/login 200 1103ms - 127.0.0.1
+Auth Request: POST /api/login
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 10ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+Database client connected
+GET /api/profile 304 160ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+Database client connected
+GET /api/profile 304 147ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 6ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 10ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+Database client connected
+GET /api/profile 304 142ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 7ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 11ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 4ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 15ms - 127.0.0.1
+CORS request from: undefined
+CORS request from: http://127.0.0.1:5500
+Authenticated request from: ajayq@gmail.com
+GET /api/profile 304 8ms - 127.0.0.1
+CORS request from: undefined

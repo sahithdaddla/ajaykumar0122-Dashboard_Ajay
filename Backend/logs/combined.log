@@ -4,3 +4,27 @@
 2025-06-22 23:15:08 [info] Environment: development
 2025-06-22 23:15:09 [info] Successfully connected to PostgreSQL
 2025-06-22 23:15:10 [info] Database schema initialized successfully
+2025-06-22 23:15:41 [info] POST /check-email-data 200 214ms - 127.0.0.1
+2025-06-22 23:15:44 [info] POST /check-email-data 200 14ms - 127.0.0.1
+2025-06-22 23:16:09 [info] POST /check-email-data 200 11ms - 127.0.0.1
+2025-06-22 23:16:58 [info] POST /api/login 200 1145ms - 127.0.0.1
+2025-06-22 23:17:10 [info] GET /api/profile 200 23ms - 127.0.0.1
+2025-06-22 23:20:31 [info] GET /api/profile 304 219ms - 127.0.0.1
+2025-06-22 23:21:59 [info] GET /api/profile 304 186ms - 127.0.0.1
+2025-06-22 23:27:00 [info] GET /api/profile 304 113ms - 127.0.0.1
+2025-06-22 23:29:15 [info] GET /api/profile 304 434ms - 127.0.0.1
+2025-06-22 23:29:35 [info] GET /api/profile 304 12ms - 127.0.0.1
+2025-06-22 23:34:33 [error] Token verification failed:
+2025-06-22 23:34:33 [info] GET /api/profile 401 11ms - 127.0.0.1
+2025-06-22 23:35:09 [info] POST /api/login 200 1103ms - 127.0.0.1
+2025-06-22 23:35:18 [info] GET /api/profile 304 10ms - 127.0.0.1
+2025-06-22 23:36:11 [info] GET /api/profile 304 160ms - 127.0.0.1
+2025-06-22 23:37:03 [info] GET /api/profile 304 147ms - 127.0.0.1
+2025-06-22 23:37:22 [info] GET /api/profile 304 6ms - 127.0.0.1
+2025-06-22 23:37:26 [info] GET /api/profile 304 10ms - 127.0.0.1
+2025-06-22 23:38:09 [info] GET /api/profile 304 142ms - 127.0.0.1
+2025-06-22 23:38:10 [info] GET /api/profile 304 7ms - 127.0.0.1
+2025-06-22 23:38:29 [info] GET /api/profile 304 11ms - 127.0.0.1
+2025-06-22 23:38:45 [info] GET /api/profile 304 4ms - 127.0.0.1
+2025-06-22 23:38:58 [info] GET /api/profile 304 15ms - 127.0.0.1
+2025-06-22 23:39:03 [info] GET /api/profile 304 8ms - 127.0.0.1
