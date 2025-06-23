@@ -84,14 +84,14 @@ const allowedOrigins = [
   'http://localhost:8006',
   'http://localhost:8007',
   'http://localhost:8008',
-  'http://localhost:3000',
+  'http://13.48.195.115:3029',
   'http://127.0.0.1:5500',
   'http://127.0.0.1:5502',
   'http://44.223.23.145:8005',
   'http://44.223.23.145:8006',
   'http://44.223.23.145:8007',
   'http://44.223.23.145:8008',
-  process.env.FRONTEND_URL || 'http://localhost:3000',
+  process.env.FRONTEND_URL || 'http://13.48.195.115:3029',
 ];
 
 // Enhanced CORS setup

@@ -715,7 +715,7 @@ const checkEmail = debounce(async (email) => {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/check-email-data', {
+        const response = await fetch('http://13.48.195.115:3029/check-email-data', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -821,7 +821,7 @@ document.getElementById('forgotPasswordForm').addEventListener('submit', async (
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
 
     try {
-        const response = await fetch('http://localhost:3000/api/forgot', {
+        const response = await fetch('http://13.48.195.115:3029/api/forgot', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, newPassword, confirmNewPassword })

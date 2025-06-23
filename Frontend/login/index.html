@@ -538,7 +538,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
 
   try {
-    const response = await fetch('http://localhost:3000/api/login', {
+    const response = await fetch('http://13.48.195.115:3029/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

@@ -795,7 +795,7 @@
                 errorElement.textContent = 'Checking email availability...';
                 errorElement.style.color = '#0077ff';
                 
-                const response = await fetch('http://localhost:3000/check-email-data', {
+                const response = await fetch('http://13.48.195.115:3029/check-email-data', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email })
@@ -943,7 +943,7 @@
             signupButton.disabled = true;
             signupButton.textContent = 'Signing Up...';
             
-            const response = await fetch('http://localhost:3000/api/signup', {
+            const response = await fetch('http://13.48.195.115:3029/api/signup', {
                 method: 'POST',
                 body: formData
             });
